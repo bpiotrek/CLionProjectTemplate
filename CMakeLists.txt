@@ -10,14 +10,14 @@ function(combine_source varName varHeader varSrc)
   file(RELATIVE_PATH
       varSrc ${CMAKE_CURRENT_SOURCE_DIR}
       ${PROJECT_SOURCE_DIR}/src/${varSrc})
-  set(${varName} ${varHeader} ${varSrc})
+  set(varFiles ${varHeader} ${varSrc})
   foreach (f ${ARGN})
     file(RELATIVE_PATH
         fi ${CMAKE_CURRENT_SOURCE_DIR}
         ${PROJECT_SOURCE_DIR}/src/${f})
-    list(APPEND ${varName} ${fi})
+    list(APPEND varFiles ${fi})
   endforeach ()
-  set(${varName} ${${varName}} PARENT_SCOPE)
+  set(${varName} ${${varName}} ${varFiles} PARENT_SCOPE)
 endfunction()
 
 include_directories(headers)

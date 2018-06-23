@@ -25,8 +25,6 @@ add_subdirectory(${CMAKE_BINARY_DIR}/googletest-src
 
 include_directories(${CMAKE_BINARY_DIR}/googletest-src/googletest/include)
 
-# Now simply link against gtest or gtest_main as needed. Eg
-
 function(link_test testName testSrc)
   set(test_files)
   foreach (t ${ARGN})
