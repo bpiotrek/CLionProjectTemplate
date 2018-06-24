@@ -26,13 +26,7 @@ add_subdirectory(${CMAKE_BINARY_DIR}/googletest-src
 include_directories(${CMAKE_BINARY_DIR}/googletest-src/googletest/include)
 
 function(link_test testName testSrc)
-  set(test_files)
-  foreach (t ${ARGN})
-    file(RELATIVE_PATH t ${CMAKE_CURRENT_SOURCE_DIR}
-        ${PROJECT_SOURCE_DIR}/src/${t})
-    list(APPEND test_files ${t})
-  endforeach ()
-  add_executable(${testName} ${testSrc} ${test_files})
-  target_link_libraries(${testName} gtest_main)
+  add_executable(${testName} ${testSrc})
+  target_link_libraries(${testName} gtest_main ${ARGN})
   add_test(NAME ${testName} COMMAND ${testName})
 endfunction()

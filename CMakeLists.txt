@@ -3,7 +3,7 @@ project(gtestsproject_template)
 
 set(CMAKE_CXX_STANDARD 17)
 
-function(combine_source varName varHeader varSrc)
+function(combine_source varLibName varHeader varSrc)
   file(RELATIVE_PATH
       varHeader ${CMAKE_CURRENT_SOURCE_DIR}
       ${PROJECT_SOURCE_DIR}/headers/${varHeader})
@@ -17,7 +17,7 @@ function(combine_source varName varHeader varSrc)
         ${PROJECT_SOURCE_DIR}/src/${f})
     list(APPEND varFiles ${fi})
   endforeach ()
-  set(${varName} ${${varName}} ${varFiles} PARENT_SCOPE)
+  add_library(${varLibName} STATIC ${varFiles})
 endfunction()
 
 include_directories(headers)
