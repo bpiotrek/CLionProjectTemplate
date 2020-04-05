@@ -1,3 +1,4 @@
-combine_source(MY_MAIN_SRC main.hxx main.cxx)
+cmake_minimum_required(VERSION 3.16)
 
-add_executable(main ${MY_MAIN_SRC})
+add_library(LibMain STATIC libMain.cxx)
+add_library(Lib SHARED lib.cxx)

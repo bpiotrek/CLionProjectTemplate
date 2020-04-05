@@ -1,27 +1,14 @@
-cmake_minimum_required(VERSION 3.10)
-project(gtestsproject_template)
+cmake_minimum_required(VERSION 3.16)
+
+project(CMakeProjectTemplate)
 
 set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++17")
 
-function(combine_source varLibName varHeader varSrc)
-  file(RELATIVE_PATH
-      varHeader ${CMAKE_CURRENT_SOURCE_DIR}
-      ${PROJECT_SOURCE_DIR}/headers/${varHeader})
-  file(RELATIVE_PATH
-      varSrc ${CMAKE_CURRENT_SOURCE_DIR}
-      ${PROJECT_SOURCE_DIR}/src/${varSrc})
-  set(varFiles ${varHeader} ${varSrc})
-  foreach (f ${ARGN})
-    file(RELATIVE_PATH
-        fi ${CMAKE_CURRENT_SOURCE_DIR}
-        ${PROJECT_SOURCE_DIR}/src/${f})
-    list(APPEND varFiles ${fi})
-  endforeach ()
-  add_library(${varLibName} STATIC ${varFiles})
-endfunction()
+enable_testing()
 
-include_directories(headers)
+include_directories(${PROJECT_SOURCE_DIR}/headers)
 
 add_subdirectory(src)
-
-add_subdirectory(tests)
+add_subdirectory(app)
+add_subdirectory(test)
